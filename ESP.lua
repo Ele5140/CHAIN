@@ -76,9 +76,8 @@ end)
 RunService.Heartbeat:Connect(function()
 	for i, v in pairs(workspace:GetChildren()) do
 		if v:IsA("Model") and v.Name == "CHAIN" and Players:GetPlayerFromCharacter(v) == nil then
-			local chain = workspace:FindFirstChild("CHAIN")
 			if not CoreGui:FindFirstChild("chain") then
-				create1(chain,"chain",Color3.fromRGB(255, 69, 69))
+				create1(v,"chain",Color3.fromRGB(255, 69, 69))
 			end
 			CoreGui:FindFirstChild("chain").Enabled = ChainToggle
 		elseif not workspace:FindFirstChild("CHAIN") then
