@@ -60,10 +60,12 @@ RunService.Heartbeat:Connect(function()
 
 		for i, v in pairs(CoreGui:GetChildren()) do
 			if v:IsA("Highlight") and v.Name == (player.UserId .. "ESP1") then
-				if player.Character:FindFirstChild("Humanoid").Health ~= 0  then
-					v.Enabled = Toggle
-				else
-					v.Enabled = false
+				if player.Character:FindFirstChild("Humanoid") then
+					if player.Character:FindFirstChild("Humanoid").Health ~= 0  then
+						v.Enabled = Toggle
+					else
+						v.Enabled = false
+					end
 				end
 			end
 		end
@@ -74,15 +76,19 @@ RunService.Heartbeat:Connect(function()
 end)
 
 RunService.Heartbeat:Connect(function()
-	if workspace.Misc.AI:FindFirstChild("CHAIN") then
-		local chain = workspace.Misc.AI:FindFirstChild("CHAIN")
-		if not CoreGui:FindFirstChild("CHAIN") then
-			create1(chain, "CHAIN", Color3.fromRGB(255, 76, 76))
-		end
-		CoreGui:FindFirstChild("CHAIN").Enabled = ChainToggle
-	else
-		if CoreGui:FindFirstChild("CHAIN") then
-			CoreGui:FindFirstChild("CHAIN"):Destroy()
+	if workspace:FindFirstChild("Misc") then
+		if workspace.Misc:FindFirstChild("AI") then
+			if workspace.Misc.AI:FindFirstChild("CHAIN") then
+				local chain = workspace.Misc.AI:FindFirstChild("CHAIN")
+				if not CoreGui:FindFirstChild("CHAIN") then
+					create1(chain, "CHAIN", Color3.fromRGB(255, 76, 76))
+				end
+				CoreGui:FindFirstChild("CHAIN").Enabled = ChainToggle
+			else
+				if CoreGui:FindFirstChild("CHAIN") then
+					CoreGui:FindFirstChild("CHAIN"):Destroy()
+				end
+			end
 		end
 	end
 end)
