@@ -74,16 +74,15 @@ RunService.Heartbeat:Connect(function()
 end)
 
 RunService.Heartbeat:Connect(function()
-	for i, v in pairs(workspace:GetChildren()) do
-		if v:IsA("Model") and v.Name == "CHAIN" and Players:GetPlayerFromCharacter(v) == nil then
-			if not CoreGui:FindFirstChild("chain") then
-				create1(v,"chain",Color3.fromRGB(255, 69, 69))
-			end
-			CoreGui:FindFirstChild("chain").Enabled = ChainToggle
-		elseif not workspace:FindFirstChild("CHAIN") then
-			if CoreGui:FindFirstChild("chain") then
-				CoreGui:FindFirstChild("chain"):Destroy()
-			end
+	if workspace.Misc.AI:FindFirstChild("CHAIN") then
+		local chain = workspace.Misc.AI:FindFirstChild("CHAIN")
+		if not CoreGui:FindFirstChild("CHAIN") then
+			create1(chain, "CHAIN", Color3.fromRGB(255, 76, 76))
 		end
-	end		
+		CoreGui:FindFirstChild("CHAIN").Enabled = ChainToggle
+	else
+		if CoreGui:FindFirstChild("CHAIN") then
+			CoreGui:FindFirstChild("CHAIN"):Destroy()
+		end
+	end
 end)
