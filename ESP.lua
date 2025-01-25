@@ -1,8 +1,10 @@
+-- Script by Ele5140 on GitHub, if you get access to it, you may use it. (idk how copy stuff works lmao)
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 
-local Bypass = Players.LocalPlayer
+local Bypass = game:GetService("CoreGui")
 
 local CoreGui = Instance.new("Folder")
 CoreGui.Parent = Bypass
@@ -21,11 +23,12 @@ end
 local Toggle = false
 local ChainToggle = false
 
-UIS.InputBegan:Connect(function(input)
+UIS.InputBegan:Connect(function(input, v)
+	if v then return end
 	if input.KeyCode ==Enum.KeyCode.P then
 		Toggle = not Toggle
 	end
-	
+
 	if input.KeyCode ==Enum.KeyCode.O then
 		ChainToggle = not ChainToggle
 	end
