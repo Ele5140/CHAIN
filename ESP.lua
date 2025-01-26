@@ -10,7 +10,7 @@ local RunService = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 
-local Bypass = game:GetService("CoreGui")
+local Bypass = Players.LocalPlayer.PlayerGui
 
 local CoreGui = Instance.new("Folder")
 CoreGui.Parent = Bypass
@@ -56,7 +56,7 @@ local Round2 = Instance.new("UICorner")
 Round2.CornerRadius = UDim.new(1,0)
 Round2.Parent = CHAINButton
 
--- Highlight Creation
+-- ESP Creation
 
 local create1 = function(thing, name, color)
 	local highlight = Instance.new("Highlight")
@@ -66,6 +66,21 @@ local create1 = function(thing, name, color)
 	highlight.OutlineColor = color
 	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	highlight.Name = name
+	
+	local NameUI = Instance.new("BillboardGui")
+	NameUI.Parent = highlight
+	NameUI.Size = UDim2.new(5,10,1,10)
+	NameUI.AlwaysOnTop = true
+	NameUI.Adornee = thing:WaitForChild("Torso")
+	
+	local Name = Instance.new("TextLabel")
+	Name.Parent = NameUI
+	Name.Size = UDim2.new(1,0,1,0)
+	Name.BackgroundTransparency = 1
+	Name.TextSize = 14
+	Name.Text = thing.Name
+	Name.TextScaled = true
+	Name.TextColor3 = color
 end
 
 local Toggle = true
