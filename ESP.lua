@@ -10,7 +10,7 @@ local RunService = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 
-local Bypass = game:GetService("CoreGui")
+local Bypass = Players.LocalPlayer.PlayerGui
 
 local CoreGui = Instance.new("Folder")
 CoreGui.Parent = Bypass
@@ -87,8 +87,6 @@ UIS.InputBegan:Connect(function(input, v)
 	end
 end)
 
-local humsHealth = {}
-
 -- Highlight Handler
 
 for i, player in pairs(Players:GetChildren()) do
@@ -96,9 +94,7 @@ for i, player in pairs(Players:GetChildren()) do
 	if not CoreGui:FindFirstChild(player.UserId) then
 		create1(player.Character, (player.UserId), Color3.new(1,1,1))
 		task.wait()
-		humsHealth[player.UserId] = player.Character:FindFirstChild("Humanoid").Health
 	end
-
 end
 
 game.Players.PlayerAdded:Connect(function(player)
@@ -117,12 +113,12 @@ end)
 RunService.Heartbeat:Connect(function()
 	for i, player in pairs(Players:GetChildren()) do
 		repeat wait() until player.Character
-		
+
 		local char = player.Character
 		local hum = char:FindFirstChild("Humanoid")
 		local ID = player.UserId
-		
-		if player.Character then
+
+		if char then
 			if not CoreGui:FindFirstChild(player.UserId) then
 				create1(char, player.UserId, Colors.Players)
 			end
@@ -137,14 +133,6 @@ RunService.Heartbeat:Connect(function()
 				CoreGui:FindFirstChild(ID).OutlineColor = Color3.new(1,0.2,0.2)
 				TS:Create(CoreGui:FindFirstChild(ID), TweenInfo.new(1), {OutlineTransparency = 1}):Play()
 			end
-			
-			if hum.Health ~= humsHealth[ID] and hum.Health < humsHealth[ID] then
-				local colorsub = (100 - (humsHealth[ID] - hum.Health)) / 100
-				print(colorsub)
-				CoreGui:FindFirstChild(ID).OutlineColor = Color3.new(1,colorsub,colorsub)
-			end
-			
-			humsHealth[ID] = hum.Health
 		end
 		task.wait()
 	end
