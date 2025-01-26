@@ -71,7 +71,7 @@ local create1 = function(thing, name, color)
 	NameUI.Parent = highlight
 	NameUI.Size = UDim2.new(5,10,1,10)
 	NameUI.AlwaysOnTop = true
-	NameUI.Adornee = thing:WaitForChild("Torso")
+	NameUI.Adornee = thing
 	
 	local Name = Instance.new("TextLabel")
 	Name.Parent = NameUI
