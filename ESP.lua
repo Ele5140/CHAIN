@@ -10,7 +10,7 @@ local RunService = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 
-local Bypass = Players.LocalPlayer.PlayerGui
+local Bypass = game:GetService("CoreGui")
 
 local CoreGui = Instance.new("Folder")
 CoreGui.Parent = Bypass
